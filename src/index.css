@@ -1,0 +1,280 @@
+/* CSS Design System - Napdoee Retro Dino Portfolio & CMS */
+
+:root {
+  --bg-primary: #F7F3E9;
+  --color-base: #535353;
+  --color-accent: #4CAF50;
+  --color-highlight: #FF6B35;
+  --color-highlight-hover: #e55a2b;
+  --color-text: #1A1A1A;
+  --color-border: #1A1A1A;
+  
+  --pixel-border-width: 4px;
+  --pixel-border: var(--pixel-border-width) solid var(--color-border);
+  --pixel-border-sm: 2px solid var(--color-border);
+  --pixel-shadow: 4px 4px 0px 0px var(--color-border);
+  --pixel-shadow-sm: 2px 2px 0px 0px var(--color-border);
+  --pixel-shadow-hover: 2px 2px 0px 0px var(--color-border);
+  --pixel-shadow-active: 0px 0px 0px 0px var(--color-border);
+  
+  --font-display: 'Press Start 2P', monospace;
+  --font-body: 'DM Mono', monospace;
+  --font-label: 'Silkscreen', monospace;
+}
+
+/* Base resets & typography */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  /* Custom retro 8-bit pixel pointer */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%231A1A1A' d='M0 0h8v2H2v2h2v2h2v2h2v2h2v2h2v2h-4v-2H8v-2H6V8H4V6H2V2H0V0zm10 14h2v8h-2v-8zm4-4h2v12h-2V10zm4-4h2v16h-2V6zm4-4h2v20h-2V2z'/%3E%3C/svg%3E"), auto;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--color-text);
+  line-height: 1.6;
+  font-size: 16px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Selection style */
+::selection {
+  background-color: var(--color-highlight);
+  color: #fff;
+}
+
+/* Accessiblity Focus states */
+*:focus-visible {
+  outline: 3px dashed var(--color-highlight);
+  outline-offset: 4px;
+}
+
+/* Responsive Font Sizes */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+h1, h2, h3, h4, .font-retro-game {
+  font-family: var(--font-display);
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.font-retro-label {
+  font-family: var(--font-label);
+  font-weight: normal;
+}
+
+/* Layout Utilities */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* Pixel UI primitives */
+.pixel-box {
+  background-color: #FFF;
+  border: var(--pixel-border);
+  box-shadow: var(--pixel-shadow);
+  transition: all 150ms steps(4);
+}
+
+.pixel-box-interactive {
+  composes: pixel-box;
+}
+.pixel-box-interactive:hover {
+  transform: translate(2px, 2px);
+  box-shadow: var(--pixel-shadow-hover);
+}
+.pixel-box-interactive:active {
+  transform: translate(4px, 4px);
+  box-shadow: var(--pixel-shadow-active);
+}
+
+/* Custom interactive retro button style */
+.btn-pixel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  background-color: var(--color-accent);
+  color: #FFF;
+  font-family: var(--font-display);
+  font-size: 12px;
+  text-decoration: none;
+  border: var(--pixel-border);
+  box-shadow: var(--pixel-shadow);
+  transform: translate(0, 0);
+  transition: all 150ms steps(4);
+  /* Touch target rule of Fitts' Law */
+  min-height: 48px;
+  min-width: 120px;
+}
+.btn-pixel:hover {
+  background-color: #5ec662;
+  transform: translate(2px, 2px);
+  box-shadow: var(--pixel-shadow-hover);
+}
+.btn-pixel:active {
+  transform: translate(4px, 4px);
+  box-shadow: var(--pixel-shadow-active);
+}
+
+.btn-pixel-orange {
+  background-color: var(--color-highlight);
+}
+.btn-pixel-orange:hover {
+  background-color: #ff8659;
+}
+
+.btn-pixel-gray {
+  background-color: var(--color-base);
+}
+.btn-pixel-gray:hover {
+  background-color: #696969;
+}
+
+/* Animations */
+@keyframes scrollFloor {
+  0% { background-position-x: 0px; }
+  100% { background-position-x: -600px; }
+}
+
+@keyframes animateBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes dinoRun {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes jumpBounce {
+  0% { transform: translateY(50px); opacity: 0; }
+  60% { transform: translateY(-10px); opacity: 1; }
+  80% { transform: translateY(4px); }
+  100% { transform: translateY(0); }
+}
+
+.animate-jump {
+  animation: jumpBounce 400ms steps(5) forwards;
+}
+
+.blink {
+  animation: animateBlink 1s infinite steps(2);
+}
+
+.dino-run-motion {
+  animation: dinoRun 250ms infinite steps(2);
+}
+
+/* Scroll Animation Engine - GPU accelerated */
+.will-change-scroll {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Responsive Retro Layout elements */
+.grid-bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .grid-bento {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-bento {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Form validation colors */
+.pixel-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: var(--pixel-border);
+  box-shadow: var(--pixel-shadow-sm);
+  background-color: #FFF;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-text);
+  outline: none;
+  min-height: 48px;
+}
+
+.pixel-input:focus {
+  border-color: var(--color-highlight);
+  box-shadow: 4px 4px 0px 0px var(--color-highlight);
+}
+
+.pixel-label {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+.pixel-input-error {
+  border-color: #F44336 !important;
+  box-shadow: 4px 4px 0px 0px #F44336 !important;
+}
+
+.error-text {
+  font-family: var(--font-label);
+  font-size: 12px;
+  color: #F44336;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+/* Scroll-experience Parallax Styles */
+.scroll-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100vh;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Disable parallax transitions for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+  .floor-scroll {
+    animation: none !important;
+  }
+  .dino-run-motion {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,84 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Dynamic landing page content settings
+model Setting {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          Int          @id @default(autoincrement())
+  slug        String       @unique
+  label       String
+  color       String?
+  icon        String?
+  description String?
+  order       Int          @default(0)
+  isActive    Boolean      @default(true)
+  experiences Experience[]
+  projects    Project[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+// Career / organization / certification experiences
+model Experience {
+  id            Int      @id @default(autoincrement())
+  title         String
+  organization  String
+  categoryId    Int
+  category      Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  period        String
+  description   String
+  highlights    String[]
+  skills        String[]
+  credentialUrl String?
+  icon          String?
+  isActive      Boolean  @default(true)
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// Portfolio projects
+model Project {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String
+  thumbnail   String?
+  tags        String[]
+  liveUrl     String?
+  repoUrl     String?
+  isFeatured  Boolean    @default(false)
+  categories  Category[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+// Contact form inquiries
+model Inquiry {
+  id        Int      @id @default(autoincrement())
+  nama      String
+  whatsapp  String
+  email     String
+  detail    String
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+}
+
+// Admin users
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
