@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { apiFetch } from './api';
 
 export const fallbackCategoryMap = {
   work: { id: 1, slug: 'work', label: 'WORK', color: '#FF6B35', icon: 'briefcase', order: 1 },
@@ -159,9 +160,9 @@ export function usePortfolioData() {
     const loadContent = async () => {
       try {
         const [settingsRes, experiencesRes, projectsRes] = await Promise.all([
-          fetch('/api/settings'),
-          fetch('/api/experiences'),
-          fetch('/api/projects'),
+          apiFetch('/api/settings'),
+          apiFetch('/api/experiences'),
+          apiFetch('/api/projects'),
         ]);
 
         if (!mounted) return;

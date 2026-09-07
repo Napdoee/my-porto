@@ -1,0 +1,23 @@
+# Railway Configuration for Napdoee Backend
+# Railway auto-detects most settings, this file is optional
+# Uncomment and customize if needed
+
+[build]
+builder = "NIXPACKS"
+buildCommand = "npm install && npx prisma generate"
+
+[deploy]
+startCommand = "npm run server"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+# Health check (optional)
+# Railway will ping this endpoint to verify deployment
+[deploy.healthcheck]
+path = "/api/health"
+timeout = 100
+interval = 60
+
+# Environment detection
+[environments.production]
+NODE_ENV = "production"

@@ -1,3 +1,5 @@
+import { apiFetch } from './api';
+
 export function getAdminToken() {
   return localStorage.getItem('adminToken');
 }
@@ -14,7 +16,7 @@ export function getAdminHeaders(extraHeaders = {}) {
 export async function adminFetch(url, init = {}) {
   const headers = getAdminHeaders(init.headers || {});
 
-  const response = await fetch(url, {
+  const response = await apiFetch(url, {
     ...init,
     headers,
     credentials: 'include',
@@ -29,7 +31,7 @@ export async function adminFetch(url, init = {}) {
 
 export async function logoutAdmin() {
   try {
-    await fetch('/api/auth/logout', {
+    await apiFetch('/api/auth/logout', {
       method: 'POST',
       credentials: 'include',
     });

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Shield, AlertTriangle } from 'lucide-react';
 import PixelCard from '../components/PixelCard';
 import PixelButton from '../components/PixelButton';
+import { apiFetch } from '../lib/api';
 
 const parseResponseBody = async (response) => {
   const raw = await response.text();
@@ -27,7 +28,7 @@ const AdminLogin = () => {
     setErrorMsg('');
 
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await apiFetch('/api/auth/login', {
         method: 'POST',
         credentials: 'include',
         headers: {

@@ -3,6 +3,7 @@ import { AlertCircle, Check } from 'lucide-react';
 import PixelButton from './PixelButton';
 import PixelCard from './PixelCard';
 import { playError, playSuccess } from '../lib/soundEngine';
+import { apiFetch } from '../lib/api';
 
 const getInitialForm = (selectedProject, devName) => ({
   name: '',
@@ -46,7 +47,7 @@ const MissionRequestForm = ({ settings = {}, selectedProject = '' }) => {
     if (!validateForm()) return;
 
     try {
-      const response = await fetch('/api/inquiries', {
+      const response = await apiFetch('/api/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
