@@ -183,18 +183,8 @@ const AdminDashboard = () => {
               </thead>
               <tbody>
                 {recentInquiries.map((inq, idx) => {
-                  let statusBg = '#FFF';
-                  let statusColor = '#000';
-                  if (inq.status === 'NEW') {
-                    statusBg = 'var(--color-highlight)';
-                    statusColor = '#FFF';
-                  } else if (inq.status === 'READ') {
-                    statusBg = 'var(--color-accent)';
-                    statusColor = '#FFF';
-                  } else {
-                    statusBg = 'var(--color-base)';
-                    statusColor = '#FFF';
-                  }
+                  const statusBg = inq.status === 'NEW' ? 'var(--color-highlight)' : inq.status === 'READ' ? 'var(--color-accent)' : 'var(--color-base)';
+                  const statusColor = '#FFF';
 
                   return (
                     <tr key={idx} style={{ borderBottom: '1px solid #CCC' }}>

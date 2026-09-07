@@ -31,7 +31,7 @@ export function authMiddleware(req, res, next) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.admin = decoded;
     next();
-  } catch (err) {
+  } catch {
     return res.status(403).json({ error: 'FORBIDDEN: Invalid or expired token' });
   }
 }

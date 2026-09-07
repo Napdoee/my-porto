@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Gamepad2, Archive, CheckCircle, Mail, MessageSquare, AlertCircle } from 'lucide-react';
+import { Gamepad2, Archive, CheckCircle } from 'lucide-react';
 import PixelCard from '../components/PixelCard';
 import PixelButton from '../components/PixelButton';
 import { adminFetch, logoutAdmin } from '../lib/adminAuth';
@@ -124,18 +124,8 @@ const AdminInquiries = () => {
                   </thead>
                   <tbody>
                     {inquiries.map((inq) => {
-                      let statusBg = '#FFF';
-                      let statusColor = '#000';
-                      if (inq.status === 'NEW') {
-                        statusBg = 'var(--color-highlight)';
-                        statusColor = '#FFF';
-                      } else if (inq.status === 'READ') {
-                        statusBg = 'var(--color-accent)';
-                        statusColor = '#FFF';
-                      } else {
-                        statusBg = 'var(--color-base)';
-                        statusColor = '#FFF';
-                      }
+                      const statusBg = inq.status === 'NEW' ? 'var(--color-highlight)' : inq.status === 'READ' ? 'var(--color-accent)' : 'var(--color-base)';
+                      const statusColor = '#FFF';
 
                       const isSelected = selectedInquiry && selectedInquiry.id === inq.id;
 

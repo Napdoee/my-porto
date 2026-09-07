@@ -16,13 +16,14 @@ const StatSheet = ({ settings = {} }) => {
       { threshold: 0.15 } // Trigger when at least 15% is visible
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const sectionElement = sectionRef.current;
+    if (sectionElement) {
+      observer.observe(sectionElement);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (sectionElement) {
+        observer.unobserve(sectionElement);
       }
     };
   }, []);
@@ -35,10 +36,10 @@ const StatSheet = ({ settings = {} }) => {
   ];
 
   const skills = [
-    { name: settings.skill_1_name || 'React.js & Frontend design', percentage: parseInt(settings.skill_1_pct) || 90, xp: '18,500' },
-    { name: settings.skill_2_name || 'Node.js & Express API', percentage: parseInt(settings.skill_2_pct) || 85, xp: '15,200' },
-    { name: settings.skill_3_name || 'Prisma ORM & PostgreSQL', percentage: parseInt(settings.skill_3_pct) || 80, xp: '12,800' },
-    { name: settings.skill_4_name || 'Guitar & Audio Editing', percentage: parseInt(settings.skill_4_pct) || 75, xp: '9,400' },
+    { name: settings.skill_1_name || 'React & Frontend Development', percentage: parseInt(settings.skill_1_pct) || 85, xp: '16,200' },
+    { name: settings.skill_2_name || 'Node.js & Backend API', percentage: parseInt(settings.skill_2_pct) || 80, xp: '14,500' },
+    { name: settings.skill_3_name || 'Laravel & MySQL Database', percentage: parseInt(settings.skill_3_pct) || 75, xp: '11,800' },
+    { name: settings.skill_4_name || 'Python & JavaScript', percentage: parseInt(settings.skill_4_pct) || 85, xp: '15,900' },
   ];
 
   return (
@@ -119,9 +120,9 @@ const StatSheet = ({ settings = {} }) => {
                 </div>
                 
                 <div style={{ textAlign: 'center' }}>
-                  <h4 className="font-retro-game" style={{ fontSize: '13px', marginBottom: '6px' }}>{settings.dev_name || 'NAPDOEE'}</h4>
-                  <p className="font-retro-label" style={{ fontSize: '12px', color: '#666' }}>CLASS: {settings.class || 'LEVEL 99 WEB MAGE'}</p>
-                  <p className="font-retro-label" style={{ fontSize: '10px', color: 'var(--color-highlight)', marginTop: '4px' }}>LOCATION: {settings.location || 'MAKASSAR, ID'}</p>
+                  <h4 className="font-retro-game" style={{ fontSize: '13px', marginBottom: '6px' }}>{settings.dev_name || 'HIDAYAT SULA IDRIS'}</h4>
+                  <p className="font-retro-label" style={{ fontSize: '12px', color: '#666' }}>CLASS: {settings.class || 'WEB DEV & SI STUDENT'}</p>
+                  <p className="font-retro-label" style={{ fontSize: '10px', color: 'var(--color-highlight)', marginTop: '4px' }}>LOCATION: {settings.location || 'MAKASSAR, SULSEL'}</p>
                 </div>
               </div>
             </PixelCard>
@@ -225,7 +226,7 @@ const StatSheet = ({ settings = {} }) => {
                 color: 'var(--color-text)'
               }}
             >
-              &gt; {settings.bio || "Hello Explorer! I'm a Makassar-based Web Developer who builds sleek retro systems and clean digital playgrounds. My core capability is executing robust full-stack applications with high performance. When I'm not tweaking HMR bundles in React or managing Postgres instances with Prisma, I code custom CSS parallax scroll triggers, play retro melodies on my guitar, and edit video content. Let's start the level selection maps below!"}
+              &gt; {settings.bio || "Hello! Saya Hidayat Sula Idris, mahasiswa Sistem Informasi di UIN Alauddin Makassar dengan pengalaman dalam pengembangan dan pemeliharaan web. Saat ini bekerja sebagai Web Developer di PT Aulia Duta Haramain dan aktif sebagai Asisten Praktikum serta anggota organisasi kemahasiswaan. Menguasai React, Node.js, Laravel, Python, dan teknologi web modern. Cepat belajar dan siap berkontribusi dalam proyek teknologi informasi. Mari jelajahi proyek dan pengalaman saya!"}
             </p>
           </PixelCard>
         </div>
